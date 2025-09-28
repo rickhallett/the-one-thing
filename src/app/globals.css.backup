@@ -5,43 +5,16 @@
 }
 
 :root {
-    /* Synthwave Theme Colors */
-    --primary: #e779c1;
-    --primary-content: #201047;
-    --secondary: #58c7f3;
-    --secondary-content: #201047;
-    --accent: #f4e409;
-    --accent-content: #201047;
-    --neutral: #221551;
-    --neutral-content: #f9f7fd;
-    --base-100: #1a103d;
-    --base-200: #140b2d;
-    --base-300: #0f0821;
-    --base-content: #f9f7fd;
-    
-    /* Semantic colors */
-    --info: #53c0f3;
-    --info-content: #201047;
-    --success: #71ead2;
-    --success-content: #201047;
-    --warning: #eace6c;
-    --warning-content: #201047;
-    --error: #ec8c78;
-    --error-content: #201047;
-    
-    /* Legacy mappings for gradual migration */
-    --ink: var(--base-content);
-    --mist: var(--neutral);
-    --stone: var(--neutral-content);
-    --gold: var(--accent);
-    --plum: var(--primary);
-    --jade: var(--success);
-    --rust: var(--error);
-    --cloud: var(--base-200);
-    --paper: var(--base-100);
-    --void: var(--base-300);
-    
-    /* Layout variables */
+    --ink: #1a1a1a;
+    --mist: #f8f7f4;
+    --stone: #6b6966;
+    --gold: #c9a961;
+    --plum: #8b5a7e; /* Primary Accent */
+    --jade: #557b6e;
+    --rust: #a65d5d;
+    --cloud: #e8e6e1;
+    --paper: #fefdfb;
+    --void: #0a0a0a;
     --section-padding: clamp(40px, 8vw, 150px);
     --section-padding-mobile: clamp(20px, 6vw, 60px);
     --nav-height: 80px;
@@ -55,27 +28,19 @@ html {
 body {
     font-family: 'Noto Sans', sans-serif;
     line-height: 1.8;
-    color: var(--base-content);
-    background: var(--base-100);
+    color: var(--ink);
+    background: var(--paper);
     font-weight: 300;
     letter-spacing: 0.02em;
 }
 
-/* Synthwave gradient overlay */
 body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
     background: 
-        linear-gradient(135deg, 
-            rgba(231, 121, 193, 0.1) 0%,
-            rgba(88, 199, 243, 0.1) 50%,
-            rgba(244, 228, 9, 0.05) 100%);
-    pointer-events: none;
-    z-index: -1;
+        radial-gradient(circle at 20% 80%, var(--cloud) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, var(--mist) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, var(--paper) 0%, transparent 50%);
+    opacity: 0.4; pointer-events: none; z-index: -2;
 }
 
 .bamboo-pattern {
@@ -87,15 +52,9 @@ body::before {
 
 nav {
     position: fixed; top: 0; left: 0; right: 0;
-    background: linear-gradient(
-        to bottom, 
-        rgba(26, 16, 61, 0.95) 70%, 
-        transparent
-    );
+    background: linear-gradient(to bottom, var(--paper) 70%, transparent);
     padding: clamp(15px, 4vw, 30px) clamp(20px, 5vw, 60px); 
-    z-index: 100; 
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--primary);
+    z-index: 100; backdrop-filter: blur(10px);
     height: var(--nav-height);
 }
 
@@ -120,30 +79,17 @@ nav {
 }
 
 .nav-links a { 
-    text-decoration: none; 
-    color: var(--secondary); 
-    font-weight: 300; 
+    text-decoration: none; color: var(--stone); font-weight: 300; 
     font-size: clamp(0.85rem, 2vw, 0.95rem); 
-    transition: all 0.3s ease; 
-    position: relative; 
+    transition: color 0.4s ease; position: relative; 
     letter-spacing: 0.05em; 
     white-space: nowrap;
 }
 
 .nav-links a::after { 
-    content: ''; 
-    position: absolute; 
-    bottom: -5px; 
-    left: 0; 
-    width: 0; 
-    height: 1px; 
-    background: var(--accent); 
+    content: ''; position: absolute; bottom: -5px; left: 0; 
+    width: 0; height: 1px; background: var(--plum); 
     transition: width 0.4s ease; 
-}
-
-.nav-links a:hover {
-    color: var(--accent);
-    text-shadow: 0 0 15px currentColor;
 }
 
 .nav-links a:hover::after { width: 100%; }
@@ -251,54 +197,26 @@ h1 {
     line-height: 1.6; font-style: italic; 
 }
 
-.cta-primary {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: clamp(14px, 3vw, 18px) clamp(30px, 6vw, 50px);
-    background: linear-gradient(
-        135deg, 
-        var(--primary) 0%, 
-        var(--secondary) 100%
-    );
-    color: var(--base-100);
-    text-decoration: none;
-    font-size: clamp(0.85rem, 2vw, 0.95rem);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    font-weight: 600;
-    transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
-    border: 2px solid transparent;
-    position: relative;
-    overflow: hidden;
-    min-height: 44px;
+.cta-primary { 
+    display: inline-block; 
+    padding: clamp(14px, 3vw, 18px) clamp(30px, 6vw, 50px); 
+    background: var(--ink); color: var(--paper); text-decoration: none; 
+    font-size: clamp(0.85rem, 2vw, 0.95rem); 
+    letter-spacing: 0.1em; text-transform: uppercase; 
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1); 
+    border: 1px solid var(--ink); position: relative; overflow: hidden; 
+    min-height: 44px; /* Touch target size */
+    display: inline-flex; align-items: center; justify-content: center;
 }
 
-.cta-primary::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        var(--accent),
-        transparent
-    );
-    transition: left 0.5s ease;
+.cta-primary::before { 
+    content: ''; position: absolute; top: 0; left: -100%; 
+    width: 100%; height: 100%; background: var(--plum); 
+    transition: left 0.4s cubic-bezier(0.23, 1, 0.320, 1); z-index: -1; 
 }
 
-.cta-primary:hover::before {
-    left: 100%;
-}
-
-.cta-primary:hover {
-    box-shadow: 
-        0 0 20px var(--primary),
-        0 0 40px var(--secondary);
-}
+.cta-primary:hover::before, .cta-primary:focus::before { left: 0; }
+.cta-primary:hover, .cta-primary:focus { border-color: var(--plum); }
 
 /* Story Section Wrapper */
 .story-wrapper { 
@@ -322,8 +240,8 @@ h1 {
     padding: clamp(40px, 8vw, 150px) clamp(20px, 5vw, 60px); 
 }
 
-.story-section.paper { background: var(--base-100); }
-.story-section.mist { background: var(--base-200); }
+.story-section.paper { background: var(--paper); }
+.story-section.mist { background: var(--mist); }
 
 .story-container {
     max-width: 1200px; margin: 0 auto; display: grid;
@@ -401,45 +319,28 @@ h1 {
 
 .pillar { 
     padding: clamp(30px, 6vw, 50px) clamp(25px, 5vw, 40px); 
-    background: rgba(26, 16, 61, 0.6);
-    border: 1px solid var(--primary);
-    backdrop-filter: blur(10px);
+    background: var(--paper); border: 1px solid var(--cloud); 
     transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1); 
-    position: relative; 
-    overflow: hidden; 
+    position: relative; overflow: hidden; 
 }
 
 .pillar::before { 
-    content: ''; 
-    position: absolute; 
-    top: 0; 
-    left: 0; 
-    width: 4px; 
-    height: 100%; 
-    background: linear-gradient(
-        to bottom,
-        var(--primary),
-        var(--secondary)
-    ); 
-    transform: scaleY(0); 
-    transform-origin: top; 
+    content: ''; position: absolute; top: 0; left: 0; 
+    width: 4px; height: 100%; background: var(--plum); 
+    transform: scaleY(0); transform-origin: top; 
     transition: transform 0.4s cubic-bezier(0.23, 1, 0.320, 1); 
 }
 
 .pillar:hover::before { transform: scaleY(1); }
 .pillar:hover { 
-    border-color: var(--accent);
-    box-shadow: 
-        0 0 30px rgba(231, 121, 193, 0.3),
-        inset 0 0 20px rgba(88, 199, 243, 0.1);
-    transform: translateY(-5px);
+    transform: translateX(10px); 
+    box-shadow: -10px 0 30px rgba(0,0,0,0.1); 
 }
 
 .pillar-label { 
     font-family: 'Noto Serif', serif; 
     font-size: clamp(1.2rem, 3vw, 1.5rem); 
-    color: var(--accent); 
-    text-shadow: 0 0 10px currentColor;
+    color: var(--plum); 
     margin-bottom: clamp(15px, 3vw, 20px); 
     font-weight: 300; 
 }
@@ -459,7 +360,7 @@ h1 {
 
 .deep-dive-section { 
     padding: clamp(40px, 8vw, 150px) clamp(20px, 5vw, 60px); 
-    background: var(--neutral); 
+    background: var(--mist); 
 }
 
 .deep-dive-container { 
@@ -489,7 +390,7 @@ h1 {
 /* Pricing Section */
 .pricing-section {
     padding: clamp(40px, 8vw, 150px) clamp(20px, 5vw, 60px);
-    background: var(--base-100);
+    background: var(--paper);
 }
 
 .pricing-container {
@@ -511,9 +412,7 @@ h1 {
 .pricing-card {
     text-align: center;
     padding: clamp(40px, 8vw, 60px) clamp(30px, 6vw, 50px);
-    background: rgba(26, 16, 61, 0.6);
-    border: 1px solid var(--primary);
-    backdrop-filter: blur(10px);
+    background: var(--mist);
     position: relative;
     transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
 }
@@ -525,12 +424,7 @@ h1 {
     left: 0;
     right: 0;
     height: 4px;
-    background: linear-gradient(
-        90deg,
-        var(--primary),
-        var(--secondary),
-        var(--accent)
-    );
+    background: var(--plum);
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.4s cubic-bezier(0.23, 1, 0.320, 1);
@@ -542,10 +436,7 @@ h1 {
 
 .pricing-card:hover {
     transform: translateY(-5px);
-    border-color: var(--accent);
-    box-shadow: 
-        0 0 30px rgba(231, 121, 193, 0.3),
-        inset 0 0 20px rgba(88, 199, 243, 0.1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
 
 .pricing-type {
@@ -948,137 +839,6 @@ footer {
     .hero-subtitle {
         font-size: 0.9rem;
         margin-bottom: 20px;
-    }
-}
-
-/* Form Elements */
-input, textarea, select {
-    background: rgba(34, 21, 81, 0.8);
-    border: 1px solid var(--primary);
-    color: var(--base-content);
-    padding: 12px 16px;
-    font-size: 1rem;
-    font-family: inherit;
-    transition: all 0.3s ease;
-}
-
-input:focus, textarea:focus, select:focus {
-    outline: none;
-    border-color: var(--accent);
-    box-shadow: 
-        0 0 10px var(--accent),
-        inset 0 0 5px rgba(244, 228, 9, 0.2);
-}
-
-input::placeholder, textarea::placeholder {
-    color: rgba(249, 247, 253, 0.5);
-}
-
-/* Synthwave Special Effects */
-
-/* Neon Glow Effects */
-.neon-glow {
-    animation: neon-pulse 2s ease-in-out infinite;
-}
-
-@keyframes neon-pulse {
-    0%, 100% {
-        text-shadow: 
-            0 0 5px var(--primary),
-            0 0 10px var(--primary),
-            0 0 15px var(--primary),
-            0 0 20px var(--secondary);
-    }
-    50% {
-        text-shadow: 
-            0 0 10px var(--primary),
-            0 0 20px var(--primary),
-            0 0 30px var(--primary),
-            0 0 40px var(--secondary);
-    }
-}
-
-/* Synthwave Grid Pattern */
-.synthwave-grid {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: 
-        linear-gradient(rgba(231, 121, 193, 0.1) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(88, 199, 243, 0.1) 1px, transparent 1px);
-    background-size: 50px 50px;
-    pointer-events: none;
-    z-index: -1;
-}
-
-/* Typography Updates for Synthwave */
-h1, h2, h3, h4, h5, h6 {
-    color: var(--primary);
-    text-shadow: 0 0 20px rgba(231, 121, 193, 0.5);
-}
-
-p, li {
-    opacity: 0.9;
-}
-
-a {
-    color: var(--secondary);
-    transition: all 0.3s ease;
-}
-
-a:hover {
-    color: var(--accent);
-    text-shadow: 0 0 10px currentColor;
-}
-
-/* Accessibility Features */
-
-/* Focus Indicators */
-*:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-}
-
-/* Reduce Motion for users who prefer it */
-@media (prefers-reduced-motion: reduce) {
-    * {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-    }
-    
-    .neon-glow {
-        animation: none;
-        text-shadow: 0 0 10px var(--primary);
-    }
-    
-    .cta-primary {
-        transition: none;
-    }
-    
-    .cta-primary::before {
-        display: none;
-    }
-}
-
-/* Mobile-optimized Synthwave effects */
-@media (max-width: 768px) {
-    /* Reduce glow effects on mobile for performance */
-    .neon-glow {
-        animation: none;
-        text-shadow: 0 0 10px var(--primary);
-    }
-    
-    /* Simplify gradients */
-    .cta-primary {
-        background: var(--primary);
-    }
-    
-    /* Reduce grid opacity on mobile */
-    .synthwave-grid {
-        opacity: 0.5;
     }
 }
 
